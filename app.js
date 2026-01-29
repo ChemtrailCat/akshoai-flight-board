@@ -149,10 +149,25 @@ function createTaskCard(task) {
     const assignedPerson = boardData.team?.find(t => t.id === task.assigned);
     const assignedName = assignedPerson ? assignedPerson.name : 'Unassigned';
 
+    // Build column options for dropdown (exclude current column)
+    const columnOptions = boardData.columns
+        .filter(col => col.id !== task.column)
+        .map(col => `<div class="move-option" data-column="${col.id}">${col.icon} ${col.name}</div>`)
+        .join('');
+
     card.innerHTML = `
         <div class="task-header">
             <span class="task-flight-number">${task.id}</span>
-            <span class="task-priority ${task.priority}">${task.priority}</span>
+            <div class="task-header-right">
+                <span class="task-priority ${task.priority}">${task.priority}</span>
+                <div class="move-dropdown">
+                    <button class="move-btn" title="Move to...">▼</button>
+                    <div class="move-menu">
+                        <div class="move-menu-header">Move to:</div>
+                        ${columnOptions}
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="task-title">${task.title}</div>
         <div class="task-meta">
@@ -166,14 +181,50 @@ function createTaskCard(task) {
         ` : ''}
     `;
 
-    // Click to open modal
+    // Move dropdown functionality
+    const moveBtn = card.querySelector('.move-btn');
+    const moveMenu = card.querySelector('.move-menu');
+
+    moveBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // Don't open modal
+        // Close all other open menus first
+        document.querySelectorAll('.move-menu.active').forEach(menu => {
+            if (menu !== moveMenu) menu.classList.remove('active');
+        });
+        moveMenu.classList.toggle('active');
+    });
+
+    // Handle move option clicks
+    card.querySelectorAll('.move-option').forEach(option => {
+        option.addEventListener('click', (e) => {
+            e.stopPropagation(); // Don't open modal
+            const newColumn = option.dataset.column;
+            moveTaskToColumn(task.id, newColumn);
+            moveMenu.classList.remove('active');
+        });
+    });
+
+    // Click to open modal (but not on dropdown)
     card.addEventListener('click', (e) => {
-        if (!card.classList.contains('dragging')) {
+        if (!card.classList.contains('dragging') &&
+            !e.target.closest('.move-dropdown')) {
             openModal(task);
         }
     });
 
     return card;
+}
+
+function moveTaskToColumn(taskId, newColumn) {
+    const task = boardData.tasks.find(t => t.id === taskId);
+    if (task && task.column !== newColumn) {
+        task.column = newColumn;
+        boardData.lastUpdated = new Date().toISOString();
+        saveToLocalStorage();
+        renderBoard();
+        updateStats();
+        console.log(`Moved ${taskId} to ${newColumn}`);
+    }
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -529,5 +580,18 @@ document.addEventListener('click', (e) => {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closePRD();
+        // Also close any open move dropdowns
+        document.querySelectorAll('.move-menu.active').forEach(menu => {
+            menu.classList.remove('active');
+        });
+    }
+});
+
+// Close move dropdowns when clicking outside
+document.addEventListener('click', (e) => {
+    if (!e.target.closest('.move-dropdown')) {
+        document.querySelectorAll('.move-menu.active').forEach(menu => {
+            menu.classList.remove('active');
+        });
     }
 });

@@ -951,3 +951,103 @@ body {
 .prd-toc a:hover {
     color: var(--pwa-purple);
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   MOVE DROPDOWN - Task Column Selector
+   ═══════════════════════════════════════════════════════════════ */
+
+.task-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.task-header-right {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.move-dropdown {
+    position: relative;
+}
+
+.move-btn {
+    background: transparent;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    color: var(--text-muted);
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    line-height: 1;
+}
+
+.move-btn:hover {
+    background: var(--pwa-purple);
+    border-color: var(--pwa-purple);
+    color: white;
+}
+
+.move-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 0.25rem;
+    background: var(--card-bg);
+    border: 1px solid var(--pwa-purple);
+    border-radius: 8px;
+    min-width: 140px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+    z-index: 100;
+    overflow: hidden;
+}
+
+.move-menu.active {
+    display: block;
+    animation: dropdownFadeIn 0.15s ease-out;
+}
+
+@keyframes dropdownFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.move-menu-header {
+    font-family: var(--font-header);
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    padding: 0.5rem 0.75rem 0.25rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.move-option {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.8rem;
+    color: var(--text-primary);
+    cursor: pointer;
+    transition: all 0.15s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.move-option:hover {
+    background: var(--pwa-purple);
+    color: white;
+}
+
+.move-option:last-child {
+    border-radius: 0 0 7px 7px;
+}
