@@ -1,0 +1,65 @@
+{
+  "board": {
+    "name": "AkshoAI - Dev Tasks",
+    "subtitle": "Pan World Airlines Flight Operations",
+    "lastUpdated": "2025-01-27T06:45:00.000Z"
+  },
+  "columns": [
+    { "id": "boarding", "name": "Boarding", "icon": "🛫", "description": "Backlog - Awaiting departure" },
+    { "id": "gate-ready", "name": "Gate Ready", "icon": "🎫", "description": "Todo - Ready for takeoff" },
+    { "id": "in-flight", "name": "In Flight", "icon": "✈️", "description": "In Progress - Currently airborne" },
+    { "id": "landed", "name": "Landed", "icon": "🛬", "description": "Done - Successfully arrived" }
+  ],
+  "team": [
+    { "id": "ale", "name": "Ale", "role": "CEO", "callsign": "Daddy" },
+    { "id": "baron", "name": "Baron", "role": "COO", "callsign": "Uncle Baron" },
+    { "id": "chem", "name": "Chem", "role": "CTO", "callsign": "Uncle Chem" },
+    { "id": "stefan", "name": "Stefan", "role": "Team", "callsign": "Stefan" },
+    { "id": "emi", "name": "Emi", "role": "AI Assistant", "callsign": "Emi" }
+  ],
+  "tasks": [
+    {
+      "id": "PWA-000",
+      "title": "Master PRD Reference",
+      "description": "Core product requirements document for AkshoAI. Contains the Five Products (Hangar, Lounge, Atelier, Manifest, Dreamland), Charter Program tiers, monetization, and technical specs.",
+      "column": "boarding",
+      "priority": "high",
+      "assigned": "",
+      "created": "2025-01-27",
+      "tags": ["master", "prd", "reference"],
+      "link": "./PRD.md"
+    },
+    {
+      "id": "PWA-001",
+      "title": "Test Task for Ale",
+      "description": "Hey Daddy! If you can see this task on the Flight Board, the shared workspace is working! Try dragging this to 'Landed' when you've confirmed access.",
+      "column": "boarding",
+      "priority": "medium",
+      "assigned": "ale",
+      "created": "2025-01-27",
+      "tags": ["test", "setup"]
+    },
+    {
+      "id": "PWA-002",
+      "title": "Test Task for Baron",
+      "description": "Hey Uncle Baron! Chem set up the Flight Board for the whole team. If you can see this, the sync is working! Move this to 'Landed' when complete.",
+      "column": "boarding",
+      "priority": "medium",
+      "assigned": "baron",
+      "created": "2025-01-27",
+      "tags": ["test", "setup"]
+    },
+    {
+      "id": "PWA-003",
+      "title": "Build the Flight Board",
+      "description": "Create a custom PWA-themed Kanban board with airport departure aesthetic. Includes HTML, CSS, and JS for drag-drop functionality. Host on GitHub Pages.",
+      "column": "landed",
+      "priority": "high",
+      "assigned": "emi",
+      "created": "2025-01-27",
+      "completed": "2025-01-27",
+      "tags": ["feature", "infrastructure"],
+      "summary": "✅ COMPLETED by Emi & Chem! Built a fully functional Flight Board with: (1) PWA dark purple aesthetic matching AkshoAI branding, (2) Airport departure board UI with live clock, (3) Four columns: Boarding/Gate Ready/In Flight/Landed, (4) Drag-and-drop task management, (5) Click-to-expand task details modal, (6) Mobile responsive design. Files: index.html, styles.css, app.js, tasks.json. Next: Deploy to GitHub Pages for team access!"
+    }
+  ]
+}

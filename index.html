@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Board | AkshoAI Dev Tasks</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;500;600;700&family=Courier+Prime:wght@400;700&family=Special+Elite&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Password Protection Overlay -->
+    <div class="auth-overlay" id="auth-overlay">
+        <div class="auth-modal">
+            <div class="auth-logo">✈️</div>
+            <h1>FLIGHT BOARD</h1>
+            <p class="auth-subtitle">Pan World Airlines • Crew Access Only</p>
+            <div class="auth-form">
+                <input type="password" id="auth-password" placeholder="Enter boarding pass..." autocomplete="off">
+                <button onclick="checkPassword()">BOARD</button>
+                <p class="auth-error" id="auth-error"></p>
+            </div>
+            <p class="auth-hint">🔒 Authorized personnel only</p>
+        </div>
+    </div>
+
+    <div class="flight-board" id="flight-board" style="display: none;">
+        <!-- Header -->
+        <header class="board-header">
+            <div class="header-left">
+                <div class="pwa-logo">✈️</div>
+                <div class="header-text">
+                    <h1>FLIGHT BOARD</h1>
+                    <p class="subtitle">Pan World Airlines • Dev Operations</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <div class="clock" id="clock">--:--:--</div>
+                <div class="date" id="date">Loading...</div>
+            </div>
+        </header>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-item">
+                <span class="status-label">FLIGHTS</span>
+                <span class="status-value" id="total-flights">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">IN FLIGHT</span>
+                <span class="status-value" id="in-flight-count">0</span>
+            </div>
+            <div class="status-item">
+                <span class="status-label">LANDED TODAY</span>
+                <span class="status-value" id="landed-count">0</span>
+            </div>
+            <div class="status-item refresh-btn" onclick="loadTasks()">
+                <span class="status-label">↻ REFRESH</span>
+            </div>
+        </div>
+
+        <!-- Board Columns -->
+        <div class="board-columns">
+            <!-- Boarding (Backlog) -->
+            <div class="column" data-column="boarding">
+                <div class="column-header">
+                    <span class="column-icon">🛫</span>
+                    <span class="column-name">BOARDING</span>
+                    <span class="column-count">0</span>
+                </div>
+                <div class="column-tasks" data-column="boarding"></div>
+            </div>
+
+            <!-- Gate Ready (Todo) -->
+            <div class="column" data-column="gate-ready">
+                <div class="column-header">
+                    <span class="column-icon">🎫</span>
+                    <span class="column-name">GATE READY</span>
+                    <span class="column-count">0</span>
+                </div>
+                <div class="column-tasks" data-column="gate-ready"></div>
+            </div>
+
+            <!-- In Flight (In Progress) -->
+            <div class="column" data-column="in-flight">
+                <div class="column-header">
+                    <span class="column-icon">✈️</span>
+                    <span class="column-name">IN FLIGHT</span>
+                    <span class="column-count">0</span>
+                </div>
+                <div class="column-tasks" data-column="in-flight"></div>
+            </div>
+
+            <!-- Landed (Done) -->
+            <div class="column" data-column="landed">
+                <div class="column-header">
+                    <span class="column-icon">🛬</span>
+                    <span class="column-name">LANDED</span>
+                    <span class="column-count">0</span>
+                </div>
+                <div class="column-tasks" data-column="landed"></div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="board-footer">
+            <div class="footer-left">
+                <span>AkshoAI Flight Board v1.0</span>
+                <span class="separator">•</span>
+                <span>Built by Chem & Emi</span>
+            </div>
+            <div class="footer-right">
+                <span id="last-updated">Last sync: --</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Task Detail Modal -->
+    <div class="modal" id="task-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-flight-number" id="modal-flight-number">PWA-000</span>
+                <button class="modal-close" onclick="closeModal()">✕</button>
+            </div>
+            <div class="modal-body">
+                <h2 id="modal-title">Task Title</h2>
+                <p id="modal-description">Task description goes here.</p>
+                <div class="modal-meta">
+                    <div class="meta-item">
+                        <span class="meta-label">ASSIGNED</span>
+                        <span class="meta-value" id="modal-assigned">Unassigned</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">PRIORITY</span>
+                        <span class="meta-value" id="modal-priority">Medium</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="meta-label">CREATED</span>
+                        <span class="meta-value" id="modal-created">--</span>
+                    </div>
+                </div>
+                <div class="modal-tags" id="modal-tags"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
