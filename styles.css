@@ -700,3 +700,254 @@ body {
     color: var(--text-muted);
     margin-top: 1.5rem;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   PRD MODAL - Product Requirements Document
+   ═══════════════════════════════════════════════════════════════ */
+
+.prd-btn {
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.prd-btn:hover {
+    background: var(--pwa-purple);
+    color: white;
+}
+
+.prd-modal .prd-content {
+    max-width: 900px;
+    width: 95%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.prd-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    background: linear-gradient(135deg, var(--pwa-darker) 0%, var(--card-bg) 100%);
+}
+
+.prd-title-section {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.prd-icon {
+    font-size: 1.5rem;
+}
+
+.prd-title {
+    font-family: var(--font-header);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    color: var(--pwa-purple);
+}
+
+.prd-meta {
+    display: flex;
+    gap: 2rem;
+    padding: 0.75rem 2rem;
+    background: var(--pwa-darker);
+    border-bottom: 1px solid var(--border-color);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+.prd-body {
+    flex: 1;
+    overflow-y: auto;
+    padding: 2rem;
+    background: var(--card-bg);
+}
+
+.prd-loading {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+}
+
+/* PRD Markdown Rendering Styles */
+.prd-body h1 {
+    font-family: var(--font-header);
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--pwa-purple);
+    margin: 0 0 1rem 0;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--pwa-purple);
+}
+
+.prd-body h2 {
+    font-family: var(--font-header);
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--pwa-accent);
+    margin: 2rem 0 1rem 0;
+    padding-bottom: 0.25rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.prd-body h3 {
+    font-family: var(--font-header);
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1.5rem 0 0.75rem 0;
+}
+
+.prd-body h4 {
+    font-family: var(--font-header);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 1.25rem 0 0.5rem 0;
+}
+
+.prd-body p {
+    margin: 0.75rem 0;
+    line-height: 1.7;
+    color: var(--text-primary);
+}
+
+.prd-body ul, .prd-body ol {
+    margin: 0.75rem 0;
+    padding-left: 1.5rem;
+}
+
+.prd-body li {
+    margin: 0.4rem 0;
+    line-height: 1.6;
+    color: var(--text-primary);
+}
+
+.prd-body strong {
+    color: var(--pwa-gold);
+    font-weight: 600;
+}
+
+.prd-body em {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.prd-body code {
+    background: var(--pwa-darker);
+    padding: 0.15rem 0.4rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--pwa-green);
+}
+
+.prd-body pre {
+    background: var(--pwa-darker);
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1rem 0;
+    border: 1px solid var(--border-color);
+}
+
+.prd-body pre code {
+    background: none;
+    padding: 0;
+    color: var(--text-primary);
+}
+
+.prd-body blockquote {
+    border-left: 3px solid var(--pwa-purple);
+    margin: 1rem 0;
+    padding: 0.5rem 1rem;
+    background: rgba(159, 122, 234, 0.1);
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+.prd-body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+    font-size: 0.9rem;
+}
+
+.prd-body th {
+    background: var(--pwa-darker);
+    padding: 0.75rem;
+    text-align: left;
+    font-family: var(--font-header);
+    font-weight: 600;
+    color: var(--pwa-purple);
+    border: 1px solid var(--border-color);
+}
+
+.prd-body td {
+    padding: 0.6rem 0.75rem;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+}
+
+.prd-body tr:nth-child(even) td {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.prd-body hr {
+    border: none;
+    border-top: 1px solid var(--border-color);
+    margin: 2rem 0;
+}
+
+.prd-body a {
+    color: var(--pwa-blue);
+    text-decoration: none;
+}
+
+.prd-body a:hover {
+    text-decoration: underline;
+}
+
+/* PRD Table of Contents */
+.prd-toc {
+    background: var(--pwa-darker);
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+}
+
+.prd-toc-title {
+    font-family: var(--font-header);
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--pwa-purple);
+    margin-bottom: 0.75rem;
+    letter-spacing: 0.1em;
+}
+
+.prd-toc ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.prd-toc li {
+    margin: 0.3rem 0;
+}
+
+.prd-toc a {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    transition: color 0.2s;
+}
+
+.prd-toc a:hover {
+    color: var(--pwa-purple);
+}

@@ -55,6 +55,9 @@
                 <span class="status-label">LANDED TODAY</span>
                 <span class="status-value" id="landed-count">0</span>
             </div>
+            <div class="status-item prd-btn" onclick="openPRD()">
+                <span class="status-label">📋 PRD</span>
+            </div>
             <div class="status-item refresh-btn" onclick="loadTasks()">
                 <span class="status-label">↻ REFRESH</span>
             </div>
@@ -141,6 +144,26 @@
                     </div>
                 </div>
                 <div class="modal-tags" id="modal-tags"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- PRD Modal -->
+    <div class="modal prd-modal" id="prd-modal">
+        <div class="modal-content prd-content">
+            <div class="modal-header prd-header">
+                <div class="prd-title-section">
+                    <span class="prd-icon">📋</span>
+                    <span class="prd-title">PRODUCT REQUIREMENTS</span>
+                </div>
+                <button class="modal-close" onclick="closePRD()">✕</button>
+            </div>
+            <div class="prd-meta">
+                <span class="prd-version" id="prd-version">Version: --</span>
+                <span class="prd-updated" id="prd-updated">Updated: --</span>
+            </div>
+            <div class="prd-body" id="prd-body">
+                <div class="prd-loading">Loading PRD...</div>
             </div>
         </div>
     </div>

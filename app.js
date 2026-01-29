@@ -380,3 +380,154 @@ window.addTask = function(title, description = '', priority = 'medium', assigned
     console.log(`Added task: ${id} - ${title}`);
     return task;
 };
+
+// ═══════════════════════════════════════════════════════════════
+// PRD MODAL
+// ═══════════════════════════════════════════════════════════════
+
+let prdData = null;
+
+async function openPRD() {
+    const modal = document.getElementById('prd-modal');
+    modal.classList.add('active');
+
+    // Load PRD if not cached
+    if (!prdData) {
+        await loadPRD();
+    }
+}
+
+function closePRD() {
+    document.getElementById('prd-modal').classList.remove('active');
+}
+
+async function loadPRD() {
+    try {
+        const response = await fetch('PRD.md?' + Date.now());
+        if (!response.ok) throw new Error('Failed to load PRD');
+
+        const markdown = await response.text();
+        prdData = markdown;
+        renderPRD(markdown);
+
+    } catch (error) {
+        console.error('Error loading PRD:', error);
+        document.getElementById('prd-body').innerHTML = `
+            <div class="prd-loading">
+                ❌ Could not load PRD.md<br>
+                <small style="color: var(--text-muted);">Make sure PRD.md exists in the same folder.</small>
+            </div>
+        `;
+    }
+}
+
+function renderPRD(markdown) {
+    // Extract version and date from header
+    const versionMatch = markdown.match(/# Version:\s*(.+)/i);
+    const updatedMatch = markdown.match(/# Last Updated:\s*(.+)/i);
+
+    if (versionMatch) {
+        document.getElementById('prd-version').textContent = `Version: ${versionMatch[1]}`;
+    }
+    if (updatedMatch) {
+        document.getElementById('prd-updated').textContent = `Updated: ${updatedMatch[1]}`;
+    }
+
+    // Convert markdown to HTML
+    const html = parseMarkdown(markdown);
+    document.getElementById('prd-body').innerHTML = html;
+}
+
+function parseMarkdown(md) {
+    let html = md;
+
+    // Remove document control header (lines starting with # followed by metadata)
+    html = html.replace(/^# DOCUMENT CONTROL[\s\S]*?(?=## )/m, '');
+
+    // Escape HTML special chars first
+    html = html.replace(/&/g, '&amp;')
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;');
+
+    // Code blocks (``` ... ```)
+    html = html.replace(/```(\w*)\n([\s\S]*?)```/g, '<pre><code>$2</code></pre>');
+
+    // Inline code
+    html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+    // Headers
+    html = html.replace(/^#### (.+)$/gm, '<h4>$1</h4>');
+    html = html.replace(/^### (.+)$/gm, '<h3>$1</h3>');
+    html = html.replace(/^## (.+)$/gm, '<h2>$1</h2>');
+    html = html.replace(/^# (.+)$/gm, '<h1>$1</h1>');
+
+    // Bold and italic
+    html = html.replace(/\*\*\*(.+?)\*\*\*/g, '<strong><em>$1</em></strong>');
+    html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    html = html.replace(/\*(.+?)\*/g, '<em>$1</em>');
+
+    // Blockquotes
+    html = html.replace(/^&gt; (.+)$/gm, '<blockquote>$1</blockquote>');
+
+    // Horizontal rules
+    html = html.replace(/^---+$/gm, '<hr>');
+
+    // Tables
+    html = html.replace(/\|(.+)\|\n\|[-:| ]+\|\n((?:\|.+\|\n?)+)/g, (match, header, body) => {
+        const headers = header.split('|').filter(h => h.trim()).map(h => `<th>${h.trim()}</th>`).join('');
+        const rows = body.trim().split('\n').map(row => {
+            const cells = row.split('|').filter(c => c.trim()).map(c => `<td>${c.trim()}</td>`).join('');
+            return `<tr>${cells}</tr>`;
+        }).join('');
+        return `<table><thead><tr>${headers}</tr></thead><tbody>${rows}</tbody></table>`;
+    });
+
+    // Unordered lists
+    html = html.replace(/^(\s*)-\s+(.+)$/gm, (match, indent, content) => {
+        const level = Math.floor(indent.length / 4);
+        return `<li data-level="${level}">${content}</li>`;
+    });
+
+    // Wrap consecutive list items in ul
+    html = html.replace(/((?:<li[^>]*>[^<]*<\/li>\n?)+)/g, '<ul>$1</ul>');
+
+    // Ordered lists (basic)
+    html = html.replace(/^\d+\.\s+(.+)$/gm, '<li>$1</li>');
+
+    // Links
+    html = html.replace(/\[([^\]]+)\]\(([^)]+)\)/g, '<a href="$2" target="_blank">$1</a>');
+
+    // Paragraphs - wrap remaining text blocks
+    html = html.split('\n\n').map(block => {
+        block = block.trim();
+        if (!block) return '';
+        if (block.startsWith('<h') || block.startsWith('<ul') || block.startsWith('<ol') ||
+            block.startsWith('<pre') || block.startsWith('<blockquote') || block.startsWith('<table') ||
+            block.startsWith('<hr')) {
+            return block;
+        }
+        // Don't wrap if it's just whitespace or already has block elements
+        if (block.match(/^<[^>]+>/)) return block;
+        return `<p>${block.replace(/\n/g, '<br>')}</p>`;
+    }).join('\n');
+
+    // Clean up extra whitespace
+    html = html.replace(/\n{3,}/g, '\n\n');
+
+    return html;
+}
+
+// Close PRD modal on outside click
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('prd-modal');
+    if (e.target === modal) {
+        closePRD();
+    }
+});
+
+// Close PRD modal on Escape (already handled by existing listener, but let's be explicit)
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closePRD();
+    }
+});
