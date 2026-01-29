@@ -60,6 +60,28 @@
       "completed": "2025-01-27",
       "tags": ["feature", "infrastructure"],
       "summary": "✅ COMPLETED by Emi & Chem! Built a fully functional Flight Board with: (1) PWA dark purple aesthetic matching AkshoAI branding, (2) Airport departure board UI with live clock, (3) Four columns: Boarding/Gate Ready/In Flight/Landed, (4) Drag-and-drop task management, (5) Click-to-expand task details modal, (6) Mobile responsive design. Files: index.html, styles.css, app.js, tasks.json. Next: Deploy to GitHub Pages for team access!"
+    },
+    {
+      "id": "PWA-004",
+      "title": "Add New Flight UI Modal",
+      "description": "Add a button and form modal to create new tasks directly from the Flight Board web UI. Includes title, description, column, priority, assigned crew, and tags fields.",
+      "column": "landed",
+      "priority": "medium",
+      "assigned": "emi",
+      "created": "2025-01-29",
+      "completed": "2025-01-29",
+      "tags": ["feature", "ui"],
+      "summary": "✅ COMPLETED! Added green '+ NEW FLIGHT' button and modal form. Auto-generates PWA-XXX flight IDs, populates team dropdown, saves to localStorage."
+    },
+    {
+      "id": "PWA-005",
+      "title": "Integrate Flight Board with Main Repo",
+      "description": "Move Flight Board from standalone repo (ChemtrailCat/akshoai-flight-board) into main AkshoAI organization repo (aksho-technologies/akshoai). Eventually integrate with Neon database for multi-user sync.",
+      "column": "boarding",
+      "priority": "medium",
+      "assigned": "chem",
+      "created": "2025-01-29",
+      "tags": ["infrastructure", "migration"]
     }
   ]
 }
