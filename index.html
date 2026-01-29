@@ -58,6 +58,9 @@
             <div class="status-item prd-btn" onclick="openPRD()">
                 <span class="status-label">📋 PRD</span>
             </div>
+            <div class="status-item new-flight-btn" onclick="openNewFlightModal()">
+                <span class="status-label">+ NEW FLIGHT</span>
+            </div>
             <div class="status-item refresh-btn" onclick="loadTasks()">
                 <span class="status-label">↻ REFRESH</span>
             </div>
@@ -165,6 +168,63 @@
             <div class="prd-body" id="prd-body">
                 <div class="prd-loading">Loading PRD...</div>
             </div>
+        </div>
+    </div>
+
+    <!-- New Flight Modal -->
+    <div class="modal new-flight-modal" id="new-flight-modal">
+        <div class="modal-content new-flight-content">
+            <div class="modal-header new-flight-header">
+                <div class="new-flight-title-section">
+                    <span class="new-flight-icon">🛫</span>
+                    <span class="new-flight-title">SCHEDULE NEW FLIGHT</span>
+                </div>
+                <button class="modal-close" onclick="closeNewFlightModal()">✕</button>
+            </div>
+            <form class="new-flight-form" id="new-flight-form" onsubmit="return createNewFlight(event)">
+                <div class="form-group">
+                    <label for="flight-title">Flight Name *</label>
+                    <input type="text" id="flight-title" placeholder="Task title..." required>
+                </div>
+                <div class="form-group">
+                    <label for="flight-description">Flight Brief</label>
+                    <textarea id="flight-description" placeholder="Describe the mission..." rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="flight-column">Departure Gate</label>
+                        <select id="flight-column">
+                            <option value="boarding">🛫 Boarding</option>
+                            <option value="gate-ready">🎫 Gate Ready</option>
+                            <option value="in-flight">✈️ In Flight</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flight-priority">Priority</label>
+                        <select id="flight-priority">
+                            <option value="medium">Medium</option>
+                            <option value="high">High</option>
+                            <option value="low">Low</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="flight-assigned">Assigned Crew</label>
+                        <select id="flight-assigned">
+                            <option value="">Unassigned</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="flight-tags">Tags</label>
+                        <input type="text" id="flight-tags" placeholder="feature, bug, docs...">
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeNewFlightModal()">Cancel</button>
+                    <button type="submit" class="btn-submit">✈️ Schedule Flight</button>
+                </div>
+            </form>
         </div>
     </div>
 

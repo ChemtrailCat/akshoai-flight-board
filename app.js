@@ -595,3 +595,114 @@ document.addEventListener('click', (e) => {
         });
     }
 });
+
+// ═══════════════════════════════════════════════════════════════
+// NEW FLIGHT MODAL - Create Task
+// ═══════════════════════════════════════════════════════════════
+
+function openNewFlightModal() {
+    const modal = document.getElementById('new-flight-modal');
+    modal.classList.add('active');
+
+    // Populate team dropdown
+    populateTeamDropdown();
+
+    // Reset form
+    document.getElementById('new-flight-form').reset();
+
+    // Focus title field
+    setTimeout(() => {
+        document.getElementById('flight-title').focus();
+    }, 100);
+}
+
+function closeNewFlightModal() {
+    document.getElementById('new-flight-modal').classList.remove('active');
+}
+
+function populateTeamDropdown() {
+    const select = document.getElementById('flight-assigned');
+    select.innerHTML = '<option value="">Unassigned</option>';
+
+    if (boardData && boardData.team) {
+        boardData.team.forEach(member => {
+            const option = document.createElement('option');
+            option.value = member.id;
+            option.textContent = `${member.name} (${member.role})`;
+            select.appendChild(option);
+        });
+    }
+}
+
+function createNewFlight(event) {
+    event.preventDefault();
+
+    const title = document.getElementById('flight-title').value.trim();
+    const description = document.getElementById('flight-description').value.trim();
+    const column = document.getElementById('flight-column').value;
+    const priority = document.getElementById('flight-priority').value;
+    const assigned = document.getElementById('flight-assigned').value;
+    const tagsInput = document.getElementById('flight-tags').value.trim();
+
+    if (!title) {
+        alert('Please enter a flight name!');
+        return false;
+    }
+
+    // Generate new flight ID
+    const existingIds = boardData.tasks.map(t => {
+        const match = t.id.match(/PWA-(\d+)/);
+        return match ? parseInt(match[1]) : 0;
+    });
+    const nextId = Math.max(...existingIds, 0) + 1;
+    const flightId = 'PWA-' + String(nextId).padStart(3, '0');
+
+    // Parse tags
+    const tags = tagsInput
+        ? tagsInput.split(',').map(t => t.trim().toLowerCase()).filter(t => t)
+        : [];
+
+    // Create new task
+    const newTask = {
+        id: flightId,
+        title: title,
+        description: description,
+        column: column,
+        priority: priority,
+        assigned: assigned,
+        created: new Date().toISOString().split('T')[0],
+        tags: tags
+    };
+
+    // Add to board data
+    boardData.tasks.push(newTask);
+    boardData.board.lastUpdated = new Date().toISOString();
+
+    // Save and render
+    saveToLocalStorage();
+    renderBoard();
+    updateStats();
+
+    // Close modal
+    closeNewFlightModal();
+
+    // Log success
+    console.log(`✈️ New flight scheduled: ${flightId} - ${title}`);
+
+    return false;
+}
+
+// Close new flight modal on outside click
+document.addEventListener('click', (e) => {
+    const modal = document.getElementById('new-flight-modal');
+    if (e.target === modal) {
+        closeNewFlightModal();
+    }
+});
+
+// Close new flight modal on Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeNewFlightModal();
+    }
+});
