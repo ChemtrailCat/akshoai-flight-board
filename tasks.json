@@ -82,6 +82,83 @@
       "assigned": "chem",
       "created": "2025-01-29",
       "tags": ["infrastructure", "migration"]
+    },
+    {
+      "id": "PWA-006",
+      "title": "Fix Persistence States",
+      "description": "GitHub Issue #20 - Fix persistence states in main app. Synced from Ale's GitHub Projects board.",
+      "column": "in-flight",
+      "priority": "high",
+      "assigned": "ale",
+      "created": "2025-01-31",
+      "tags": ["main", "bug", "github-sync"],
+      "link": "https://github.com/aksho-technologies/akshoai/issues/20"
+    },
+    {
+      "id": "PWA-007",
+      "title": "Import Dependencies Show 'No CivitAI Link'",
+      "description": "GitHub Issue #28 - Import dependencies display static text 'no civitai link' instead of actual CivitAI dependency links.",
+      "column": "in-flight",
+      "priority": "low",
+      "assigned": "",
+      "created": "2025-01-31",
+      "tags": ["bug", "github-sync"],
+      "link": "https://github.com/aksho-technologies/akshoai/issues/28"
+    },
+    {
+      "id": "PWA-008",
+      "title": "CivitAI Download Speeds 10x Slower",
+      "description": "GitHub Issue #33 - Downloads via File System Access API are ~4-5 MB/s vs native browser ~50 MB/s. Proposed: Native browser download for large files (>1GB).",
+      "column": "gate-ready",
+      "priority": "medium",
+      "assigned": "ale",
+      "created": "2025-01-31",
+      "tags": ["atelier", "performance", "github-sync"],
+      "link": "https://github.com/aksho-technologies/akshoai/issues/33"
+    },
+    {
+      "id": "PWA-009",
+      "title": "Make User Profiles",
+      "description": "GitHub Issue #32 - Implement user profile system for AkshoAI.",
+      "column": "boarding",
+      "priority": "high",
+      "assigned": "ale",
+      "created": "2025-01-31",
+      "tags": ["main", "feature", "github-sync"],
+      "link": "https://github.com/aksho-technologies/akshoai/issues/32"
+    },
+    {
+      "id": "PWA-010",
+      "title": "Add ADetailer Support",
+      "description": "GitHub Issue #24 - Add ADetailer support to Atelier for automatic face/hand fixing.",
+      "column": "boarding",
+      "priority": "medium",
+      "assigned": "ale",
+      "created": "2025-01-31",
+      "tags": ["atelier", "feature", "github-sync"],
+      "link": "https://github.com/aksho-technologies/akshoai/issues/24"
+    },
+    {
+      "id": "PWA-011",
+      "title": "Add Multi Character Support",
+      "description": "GitHub Issue #25 - Add support for generating multiple characters in one image.",
+      "column": "boarding",
+      "priority": "medium",
+      "assigned": "ale",
+      "created": "2025-01-31",
+      "tags": ["atelier", "feature", "github-sync"],
+      "link": "https://github.com/aksho-technologies/akshoai/issues/25"
+    },
+    {
+      "id": "PWA-012",
+      "title": "Add Remix Feature",
+      "description": "GitHub Issue #21 - Add remix feature to regenerate variations of existing images.",
+      "column": "boarding",
+      "priority": "low",
+      "assigned": "ale",
+      "created": "2025-01-31",
+      "tags": ["atelier", "feature", "github-sync"],
+      "link": "https://github.com/aksho-technologies/akshoai/issues/21"
     }
   ]
 }
