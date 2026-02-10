@@ -2,7 +2,7 @@
   "board": {
     "name": "AkshoAI - Dev Tasks",
     "subtitle": "Pan World Airlines Flight Operations",
-    "lastUpdated": "2026-02-10T12:00:00.000Z",
+    "lastUpdated": "2026-02-10T14:00:00.000Z",
     "syncSource": "github-issues"
   },
   "columns": [
@@ -674,6 +674,19 @@
       "completed": "2025-01-29",
       "tags": ["flight-board", "feature"],
       "summary": "✅ COMPLETED! Added green '+ NEW FLIGHT' button and modal form."
+    },
+    {
+      "id": "GH-236",
+      "title": "Feature: Prompt Snippets & Tag Favorites for Atelier",
+      "description": "Two-part system: Preset Tag Combos (multi-tag macros with progressive string completion) and Favorite Tags (single-tag quick access) with sidebar palette, inline autocomplete, polarity filtering, tier-based limits, and import/export.",
+      "column": "in-flight",
+      "priority": "medium",
+      "assigned": "chem",
+      "created": "2026-02-10",
+      "tags": ["atelier", "feature"],
+      "github": { "issue": 236, "state": "OPEN", "labels": ["ATELIER"] },
+      "link": "https://github.com/aksho-technologies/akshoai/issues/236",
+      "summary": "🔄 IN PROGRESS - Brainstorm complete. Spec covers: inline smart completion (progressive string matching), sidebar palette with radial section picker, Danbooru autocomplete coexistence, positive/negative polarity filtering, tier-based snippet limits, Vault storage, JSON import/export."
     }
   ]
 }
