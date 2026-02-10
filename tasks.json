@@ -2,7 +2,7 @@
   "board": {
     "name": "AkshoAI - Dev Tasks",
     "subtitle": "Pan World Airlines Flight Operations",
-    "lastUpdated": "2026-02-09T12:00:00.000Z",
+    "lastUpdated": "2026-02-10T01:00:00.000Z",
     "syncSource": "github-issues"
   },
   "columns": [
@@ -66,13 +66,14 @@
       "id": "GH-204",
       "title": "🟠 HIGH: Implement API rate limiting",
       "description": "No rate limiting on API endpoints. DDoS vulnerability, brute force attacks possible.",
-      "column": "gate-ready",
+      "column": "in-flight",
       "priority": "high",
-      "assigned": "",
+      "assigned": "chem",
       "created": "2026-02-08",
       "tags": ["security", "high"],
-      "github": { "issue": 204, "state": "OPEN" },
-      "link": "https://github.com/aksho-technologies/akshoai/issues/204"
+      "github": { "issue": 204, "state": "OPEN", "pr": 230 },
+      "link": "https://github.com/aksho-technologies/akshoai/issues/204",
+      "summary": "🔄 IN REVIEW - PR #230: Two-layer rate limiting. Layer 1: IP-based middleware (all 77 routes). Layer 2: User-based DB-backed limits on 12 critical routes. +413 lines across 14 files."
     },
     {
       "id": "GH-205",
