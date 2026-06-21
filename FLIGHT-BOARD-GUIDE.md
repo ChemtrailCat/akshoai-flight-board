@@ -57,7 +57,7 @@ All tasks live in `tasks.json`. Here's the structure:
     { "id": "baron", "name": "Baron", "role": "COO" },
     { "id": "chem", "name": "Chem", "role": "CTO" },
     { "id": "stefan", "name": "Stefan", "role": "Team" },
-    { "id": "emi", "name": "Emi", "role": "AI Assistant" }
+    { "id": "cass", "name": "Cass", "role": "AI Assistant" }
   ],
   "tasks": [
     {
@@ -254,7 +254,7 @@ git push origin main
 - **Baron (COO)** - Operations, processes
 - **Chem (CTO)** - Technical decisions
 - **Stefan** - Development
-- **Emi** - AI Assistant
+- **Cass** - AI Assistant
 
 ---
 

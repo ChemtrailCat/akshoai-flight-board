@@ -17,7 +17,7 @@
     { "id": "chem", "name": "Chem", "role": "CTO", "callsign": "Uncle Chem" },
     { "id": "maeve", "name": "Maeve", "role": "Team", "callsign": "Hannah" },
     { "id": "stefan", "name": "Stefan", "role": "Team", "callsign": "Stefan" },
-    { "id": "emi", "name": "Emi", "role": "AI Assistant", "callsign": "Emi" }
+    { "id": "cass", "name": "Cass", "role": "AI Assistant", "callsign": "Cass" }
   ],
   "tasks": [
     {
@@ -1457,7 +1457,7 @@
       "created": "2025-01-27",
       "completed": "2025-01-27",
       "tags": ["flight-board", "infrastructure"],
-      "summary": "COMPLETED by Chem & Emi!"
+      "summary": "Originally built by Chem & Emi; now maintained by Chem & Cass."
     },
     {
       "id": "FB-002",
